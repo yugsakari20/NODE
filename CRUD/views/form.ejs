@@ -1,134 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Submit Form (POST)</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f4f4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px;
-    }
-
-    h1, h2 {
-      color: #333;
-    }
-
-    form {
-      background: #fff;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-      margin-bottom: 30px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 15px;
-      color: #444;
-      font-size: 16px;
-    }
-
-    input[type="text"],
-    input[type="email"] {
-      width: 100%;
-      padding: 10px 12px;
-      font-size: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      margin-top: 5px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #007BFF;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: #0056b3;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      max-width: 600px;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    th, td {
-      padding: 12px 20px;
-      border-bottom: 1px solid #eee;
-      text-align: left;
-    }
-
-    th {
-      background-color: #007BFF;
-      color: white;
-    }
-
-    tr:hover {
-      background-color: #f1f1f1;
-    }
-
-    @media (max-width: 500px) {
-      form, table {
-        width: 90%;
-      }
-
-      th, td {
-        padding: 10px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Form Page</title>
 </head>
 <body>
-  <h1>Submit Form</h1>
-  <form action="/submit" method="POST">
-    <label>Name:
-      <input type="text" name="name" required>
-    </label>
-    <label>Email:
-      <input type="email" name="email" required>
-    </label>
-    <button type="submit">Submit</button>
-  </form>
+    <h1>Add User</h1>
+    <form action="/insertData" method="post">
+        <input type="number" name="id" placeholder="ID" required>
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Add">
+    </form>
 
-  <% if (submissions.length > 0) { %>
-    <h2>Submitted Data</h2>
-    <table>
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Email</th>
-      </tr>
-      <% submissions.forEach((entry, index) => { %>
+    <h2>Users</h2>
+    <table border="1">
         <tr>
-          <td><%= index + 1 %></td>
-          <td><%= entry.name %></td>
-          <td><%= entry.email %></td>
+            <th>ID</th><th>Name</th><th>Email</th><th>Actions</th>
         </tr>
-      <% }); %>
+        <% student.forEach(user => { %>
+            <tr>
+                <td><%= user.userid %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td>
+                    <a href="/editData?id=<%= user.userid %>">Edit</a>
+                    <a href="/deleteData?id=<%= user.userid %>">Delete</a>
+                </td>
+            </tr>
+        <% }) %>
     </table>
-  <% } %>
 </body>
 </html>
