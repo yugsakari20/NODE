@@ -12,4 +12,17 @@ const movieSchema = new mongoose.Schema({
   trailerUrl: { type: String, required: true },
 });
 
+// Virtual field: id (as string)
+movieSchema.virtual("id").get(function () {
+  return this._id.toHexString();
+});
+
+// Ensure virtual fields are included in JSON and object output
+movieSchema.set("toJSON", {
+  virtuals: true,
+});
+movieSchema.set("toObject", {
+  virtuals: true,
+});
+
 export const Movie = mongoose.model("Movie", movieSchema);
