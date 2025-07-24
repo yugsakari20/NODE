@@ -4,7 +4,7 @@ import "../pages/CSS/ShopCatagorey.css";
 import { Shopcontext } from "../context/Shopcontext";
 import dropdown_icon from "../components/img/dropdown_icon.png";
 import Item from "../components/item/Item";
-
+// shop kjs
 const ShopCatagorey = (props) => {
   const { all_product } = useContext(Shopcontext);
 
